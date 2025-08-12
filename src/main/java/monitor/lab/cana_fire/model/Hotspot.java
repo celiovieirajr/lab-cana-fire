@@ -13,7 +13,7 @@ public class Hotspot {
     private double lat;
     private double lon;
     private String satelite;
-    private Timestamp data;
+    private Timestamp date;
 
 
     public Geometry toPoint() {
