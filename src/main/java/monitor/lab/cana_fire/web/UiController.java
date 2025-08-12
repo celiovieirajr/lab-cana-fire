@@ -1,4 +1,4 @@
-package monitor.lab.cana_fire.controller;
+package monitor.lab.cana_fire.web;
 
 import lombok.RequiredArgsConstructor;
 import monitor.lab.cana_fire.repository.AlertRepository;

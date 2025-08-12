@@ -1,4 +1,4 @@
-package monitor.lab.cana_fire.model;
+package monitor.lab.cana_fire.domain;
 
 import lombok.Data;
 import org.locationtech.jts.geom.Coordinate;

@@ -1,7 +1,6 @@
 package monitor.lab.cana_fire.ingestion;
 
 import lombok.AllArgsConstructor;
-import monitor.lab.cana_fire.parser.HotspotParser;
 import monitor.lab.cana_fire.service.HotspotService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

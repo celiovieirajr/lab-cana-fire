@@ -1,4 +1,4 @@
-package monitor.lab.cana_fire.model;
+package monitor.lab.cana_fire.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

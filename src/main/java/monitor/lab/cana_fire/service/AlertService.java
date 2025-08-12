@@ -1,8 +1,8 @@
 package monitor.lab.cana_fire.service;
 
 import lombok.RequiredArgsConstructor;
-import monitor.lab.cana_fire.model.Alert;
-import monitor.lab.cana_fire.model.Hotspot;
+import monitor.lab.cana_fire.domain.Alert;
+import monitor.lab.cana_fire.domain.Hotspot;
 import monitor.lab.cana_fire.repository.AlertRepository;
 import org.springframework.stereotype.Service;
 

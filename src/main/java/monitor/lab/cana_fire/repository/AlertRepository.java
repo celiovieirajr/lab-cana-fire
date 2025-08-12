@@ -1,6 +1,6 @@
 package monitor.lab.cana_fire.repository;
 
-import monitor.lab.cana_fire.model.Alert;
+import monitor.lab.cana_fire.domain.Alert;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
