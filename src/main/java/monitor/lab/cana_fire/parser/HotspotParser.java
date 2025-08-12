@@ -16,7 +16,7 @@ public class HotspotParser {
             new ColumnPositionMappingStrategy<>();
     static {
         strat.setType(Hotspot.class);
-        strat.setColumnMapping("lat", "lon", "satelite", "data");
+        strat.setColumnMapping("lat", "lon", "satelite", "date");
     }
 
     public static Flux<Hotspot> parse(String csv) {
