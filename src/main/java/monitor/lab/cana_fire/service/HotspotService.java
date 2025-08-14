@@ -1,6 +1,6 @@
 package monitor.lab.cana_fire.service;
 
-import monitor.lab.cana_fire.model.Hotspot;
+import monitor.lab.cana_fire.domain.Hotspot;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
 import org.springframework.core.io.Resource;

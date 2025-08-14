@@ -1,10 +1,10 @@
-package monitor.lab.cana_fire.parser;
+package monitor.lab.cana_fire.ingestion;
 
 
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBeanBuilder;
-import monitor.lab.cana_fire.model.Hotspot;
+import monitor.lab.cana_fire.domain.Hotspot;
 import reactor.core.publisher.Flux;
 
 import java.io.IOException;

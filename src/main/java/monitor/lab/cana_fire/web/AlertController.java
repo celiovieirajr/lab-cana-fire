@@ -1,8 +1,7 @@
-package monitor.lab.cana_fire.controller;
+package monitor.lab.cana_fire.web;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import monitor.lab.cana_fire.model.Alert;
+import monitor.lab.cana_fire.domain.Alert;
 import monitor.lab.cana_fire.repository.AlertRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
