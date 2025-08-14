@@ -150,5 +150,4 @@ class CanaFireApplicationTests {
 		verify(mockModel).addAttribute("alerts", alerts);
 		assertEquals("alerts", viewName);
 	}
-
 }
