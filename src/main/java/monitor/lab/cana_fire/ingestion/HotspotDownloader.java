@@ -24,6 +24,6 @@ public class HotspotDownloader {
     }
 
     private String lastUrl() {
-        return "focos_10min_20250811_1410.csv";
+        return "focos_10min_20250814_1350.csv";
     }
 }
