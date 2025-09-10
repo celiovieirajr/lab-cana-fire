@@ -1,5 +1,6 @@
 package monitor.lab.cana_fire.service;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import monitor.lab.cana_fire.domain.Alert;
 import monitor.lab.cana_fire.domain.Hotspot;
@@ -13,49 +14,52 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AlertService {
 
-private final AlertRepository repo;
+    private final AlertRepository repo;
+    private final EmailService emailService;
 
-public Alert createAlert(Hotspot hotspot) {
-    Alert alert = new Alert(
-            null,
-            hotspot.getLat(),
-            hotspot.getLon(),
-            hotspot.getDate().toLocalDateTime()
-    );
-    repo.save(alert);
-    return alert;
-    }
+    public Alert createAlert(Hotspot hotspot) {
+        Alert alert = new Alert(
+                null,
+                hotspot.getLat(),
+                hotspot.getLon(),
+                hotspot.getDate().toLocalDateTime()
+        );
+        repo.save(alert);
+//        emailService.notify(alert);
 
-    public Alert getAlertById(UUID id) {
-    return repo.findById(id).orElseThrow(()
-            -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Id não foi encontrado"));
-    }
+        return alert;
+        }
 
-    public List<Alert> getAllAlerts() {
-        List<Alert> alerts = new ArrayList<>();
-        repo.findAll().forEach(alerts::add);
-        return alerts;
-    }
+        public Alert getAlertById(UUID id) {
+        return repo.findById(id).orElseThrow(()
+                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Id não foi encontrado"));
+        }
 
-    public Alert updateAlert(UUID uuid, Alert alert) {
-        Alert entity = repo.findById(uuid)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Alert not exists"));
+        public List<Alert> getAllAlerts() {
+            List<Alert> alerts = new ArrayList<>();
+            repo.findAll().forEach(alerts::add);
+            return alerts;
+        }
 
-        entity.setDate(alert.getDate());
-        entity.setLon(alert.getLon());
-        entity.setLat(alert.getLat());
+        public Alert updateAlert(UUID uuid, Alert alert) {
+            Alert entity = repo.findById(uuid)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Alerts não existe"));
 
-        Alert entitySaved = repo.save(entity);
+            entity.setDate(alert.getDate());
+            entity.setLon(alert.getLon());
+            entity.setLat(alert.getLat());
 
-        return entitySaved;
-    }
+            Alert entitySaved = repo.save(entity);
 
-    public void deleteAlert(UUID id) {
-        Alert entity = repo.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Alert not exists"));
-        repo.delete(entity);
-    }
+            return entitySaved;
+        }
+
+        public void deleteAlert(UUID id) {
+            Alert entity = repo.findById(id)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Alerts não existe"));
+            repo.delete(entity);
+        }
 }

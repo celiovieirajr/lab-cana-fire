@@ -5,11 +5,14 @@ import monitor.lab.cana_fire.domain.Hotspot;
 import monitor.lab.cana_fire.ingestion.HotspotParser;
 import monitor.lab.cana_fire.repository.AlertRepository;
 import monitor.lab.cana_fire.service.AlertService;
+import monitor.lab.cana_fire.service.EmailService;
 import monitor.lab.cana_fire.service.HotspotService;
 import monitor.lab.cana_fire.web.AlertController;
 import monitor.lab.cana_fire.web.UiController;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ByteArrayResource;
@@ -30,6 +33,13 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class CanaFireApplicationTests {
 
+	@Mock
+	private AlertRepository mockRepo;
+
+	@InjectMocks
+	private AlertController controller;
+
+
 	@Test
 	void testAlertControllerLastest() {
 		AlertRepository mockRepo = Mockito.mock(AlertRepository.class);
@@ -43,12 +53,14 @@ class CanaFireApplicationTests {
 		assertEquals(1, result.size());
 		assertEquals(-10.0, result.get(0).getLat());
 		assertEquals(-45.0, result.get(0).getLon());
+
 	}
 
 	@Test
 	void testAlertServiceCreateAlert() {
 		AlertRepository mockRepo = Mockito.mock(AlertRepository.class);
-		AlertService service = new AlertService(mockRepo);
+		EmailService mockEmail = Mockito.mock(EmailService.class);
+		AlertService service = new AlertService(mockRepo, mockEmail);
 
 		Hotspot hotspot = new Hotspot();
 		hotspot.setLat(-10.1234);
@@ -67,6 +79,7 @@ class CanaFireApplicationTests {
 
 		assertEquals(savedAlert, alert);
 	}
+
 
 
 	@Test
@@ -136,7 +149,6 @@ class CanaFireApplicationTests {
 
 	@Test
 	void testUiControllerAddAttribute() {
-		// Arrange
 		AlertRepository mockRepo = mock(AlertRepository.class);
 		UiController controller = new UiController(mockRepo);
 
