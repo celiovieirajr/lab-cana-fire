@@ -32,7 +32,7 @@ public class HotspotService {
 
 
     public void handle(Hotspot hotspot) {
-        farms.stream()
+                farms.stream()
                 .filter(pg -> pg.contains(hotspot.toPoint()))
                 .findFirst()
                 .ifPresent(pg -> alertService.createAlert(hotspot));
