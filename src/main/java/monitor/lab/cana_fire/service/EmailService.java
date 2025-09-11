@@ -22,5 +22,4 @@ public class EmailService {
         mail.send(msg);
         System.out.println("Email enviado com sucesso para " + msg.getTo()[0]);
     }
-
 }

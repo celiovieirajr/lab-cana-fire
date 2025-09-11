@@ -28,7 +28,7 @@ public class AlertService {
                 hotspot.getDate().toLocalDateTime()
         );
         repo.save(alert);
-//        emailService.notify(alert);
+        emailService.notify(alert);
 
         return alert;
         }
