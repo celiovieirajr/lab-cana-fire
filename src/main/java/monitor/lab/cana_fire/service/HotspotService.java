@@ -20,7 +20,7 @@ public class HotspotService {
     private final List<PreparedGeometry> farms;
     private final AlertService alertService;
 
-    public HotspotService(@Value("classpath:geo/farm.geojson") Resource r,
+    public HotspotService(@Value("classpath:geo/aracatuba.geojson") Resource r,
                           AlertService alertService) throws IOException {
         GeometryJSON gjson = new GeometryJSON();
         try (Reader rd = new InputStreamReader(r.getInputStream())) {

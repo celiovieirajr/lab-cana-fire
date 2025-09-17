@@ -2,24 +2,56 @@ package monitor.lab.cana_fire.service;
 
 import lombok.RequiredArgsConstructor;
 import monitor.lab.cana_fire.domain.Alert;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
 public class EmailService {
 
-    private final JavaMailSender mail;
-    public void notify(Alert a) {
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("celiojuniorata@gmail.com");
-        msg.setSubject("🔥 Sugar‑cane fire detected");
-        msg.setText(String.format(
-                "Hotspot at %.4f, %.4f on %s%nMap: https://maps.google.com/?q=%f,%f",
-                a.getLat(), a.getLon(), a.getDate(), a.getLat(), a.getLon()));
+    @Autowired
+    private JavaMailSender mailSender;
 
-        mail.send(msg);
-        System.out.println("Email enviado com sucesso para " + msg.getTo()[0]);
+    private static final Logger log = LoggerFactory.getLogger(EmailService.class);
+
+    public void notify(Alert a) {
+        SimpleMailMessage mensagem = new SimpleMailMessage();
+        mensagem.setTo("celiojuniorata@gmail.com");
+        mensagem.setSubject("🔥 Alerta de Incêndio Detectado!");
+        mensagem.setText(buildMessage(a));
+        mensagem.setFrom("celiojuniorata@gmail.com");
+        mensagem.setFrom("aanacarla.vieira@gmail.com");
+        mensagem.setFrom("juniorvieira04055@gmail.com");
+
+        mailSender.send(mensagem);
+        log.info("E-mail enviado com sucesso! ",
+                a.getLat(), a.getLon());
     }
+
+    private String buildMessage(Alert a) {
+        return String.format(Locale.US,
+                """
+                🚨 Atenção!
+        
+                Um foco de calor foi detectado nas coordenadas:
+                📍 Latitude: %.4f
+                📍 Longitude: %.4f
+                📅 Data: %s
+        
+                🔗 Visualize no mapa:
+                https://maps.google.com/?q=%.6f,%.6f
+        
+                FIQUE ATENTO E TOME AS MEDIDAS NECESSÁRIAS!
+                """,
+                a.getLat(), a.getLon(), a.getDate(), a.getLat(), a.getLon());
+    }
+
 }
