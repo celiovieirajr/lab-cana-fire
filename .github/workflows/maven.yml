@@ -37,6 +37,9 @@ jobs:
 
     - name: Submit dependency snapshot
       uses: advanced-security/maven-dependency-submission-action@v3
+      with:
+        maven-args: "-B clean verify"
+
 
 
 
