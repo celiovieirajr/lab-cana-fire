@@ -1,11 +1,9 @@
 package monitor.lab.cana_fire.web;
 
-import lombok.AllArgsConstructor;
 import monitor.lab.cana_fire.domain.Alert;
 import monitor.lab.cana_fire.domain.Hotspot;
 import monitor.lab.cana_fire.repository.AlertRepository;
 import monitor.lab.cana_fire.service.AlertService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
