@@ -21,7 +21,6 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class CanaFireApplicationTests {
 
-	/*
 
 	@Test
 	void testAlertServiceCreateAlert() {
@@ -76,6 +75,4 @@ class CanaFireApplicationTests {
 				.expectNextCount(2)
 				.verifyComplete();
 	}
-
-	 */
 }
