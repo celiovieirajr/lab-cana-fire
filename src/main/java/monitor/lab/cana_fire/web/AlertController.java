@@ -17,14 +17,15 @@ import java.util.UUID;
 @RequestMapping("/alerts")
 public class AlertController {
 
-    private final AlertRepository alertRepository;
-
-    public AlertController(AlertRepository alertRepository) {
-        this.alertRepository = alertRepository;
-    }
-
-    @Autowired
+    private AlertRepository alertRepository;
     private AlertService service;
+
+    public AlertController() {}
+
+    public AlertController(AlertRepository alertRepository, AlertService service) {
+        this.alertRepository = alertRepository;
+        this.service = service;
+    }
 
     @GetMapping("/latest")
     public List<Alert> latest() {
