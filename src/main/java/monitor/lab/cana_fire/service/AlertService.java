@@ -1,7 +1,6 @@
 package monitor.lab.cana_fire.service;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import monitor.lab.cana_fire.domain.Alert;
 import monitor.lab.cana_fire.domain.Hotspot;
 import monitor.lab.cana_fire.repository.AlertRepository;

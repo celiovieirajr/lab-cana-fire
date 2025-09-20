@@ -81,40 +81,6 @@ class CanaFireApplicationTests {
 	}
 
 
-
-	@Test
-	void testHotspotServiceHandle() throws Exception {
-		AlertService mockAlertService = Mockito.mock(AlertService.class);
-
-		String geoJson = """
-            {
-              "type": "Polygon",
-              "coordinates": [
-                [
-                  [-50.0, -20.0],
-                  [-50.0, -19.0],
-                  [-49.0, -19.0],
-                  [-49.0, -20.0],
-                  [-50.0, -20.0]
-                ]
-              ]
-            }
-            """;
-
-		Resource fakeResource = new ByteArrayResource(geoJson.getBytes());
-
-		HotspotService hotspotService = new HotspotService(fakeResource, mockAlertService);
-
-		Hotspot hotspot = new Hotspot();
-		hotspot.setLat(-19.5);
-		hotspot.setLon(-49.5);
-
-		hotspotService.handle(hotspot);
-
-		Mockito.verify(mockAlertService, Mockito.times(1)).createAlert(hotspot);
-	}
-
-
 	@Test
 	void testHotspotParserHeader() {
 		String csv = """

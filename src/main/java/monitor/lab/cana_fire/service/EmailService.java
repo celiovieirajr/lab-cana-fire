@@ -24,12 +24,10 @@ public class EmailService {
 
     public void notify(Alert a) {
         SimpleMailMessage mensagem = new SimpleMailMessage();
-        mensagem.setTo("celiojuniorata@gmail.com");
+        mensagem.setTo("juniorvieira04055@gmail.com", "celiojuniorata@gmail.com");
         mensagem.setSubject("🔥 Alerta de Incêndio Detectado!");
         mensagem.setText(buildMessage(a));
-        mensagem.setFrom("celiojuniorata@gmail.com");
-        mensagem.setFrom("aanacarla.vieira@gmail.com");
-        mensagem.setFrom("juniorvieira04055@gmail.com");
+        mensagem.setFrom("monitorcanafire@gmail.com");
 
         mailSender.send(mensagem);
         log.info("E-mail enviado com sucesso! ",
