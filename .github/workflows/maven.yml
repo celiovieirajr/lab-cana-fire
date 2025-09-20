@@ -39,6 +39,8 @@ jobs:
       uses: advanced-security/maven-dependency-submission-action@v3
       with:
         maven-args: "-B clean verify"
+        ignore-maven-wrapper: true
+
 
 
 
