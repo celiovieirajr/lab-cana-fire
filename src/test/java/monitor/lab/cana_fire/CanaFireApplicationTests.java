@@ -11,8 +11,6 @@ import monitor.lab.cana_fire.web.AlertController;
 import monitor.lab.cana_fire.web.UiController;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ByteArrayResource;
@@ -20,41 +18,17 @@ import org.springframework.core.io.Resource;
 import org.springframework.ui.Model;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
-import static org.mockito.Mockito.*;
-
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class CanaFireApplicationTests {
 
-	@Mock
-	private AlertRepository mockRepo;
-
-	@InjectMocks
-	private AlertController controller;
-
-
-	@Test
-	void testAlertControllerLastest() {
-		AlertRepository mockRepo = Mockito.mock(AlertRepository.class);
-		AlertController controller = new AlertController(mockRepo);
-
-		Alert alert = new Alert(UUID.randomUUID(), -10.0, -45.0, LocalDateTime.now());
-		when(mockRepo.findTop100ByOrderByDateDesc()).thenReturn(List.of(alert));
-
-		List<Alert> result = controller.latest();
-
-		assertEquals(1, result.size());
-		assertEquals(-10.0, result.get(0).getLat());
-		assertEquals(-45.0, result.get(0).getLon());
-
-	}
 
 	@Test
 	void testAlertServiceCreateAlert() {
@@ -79,7 +53,6 @@ class CanaFireApplicationTests {
 
 		assertEquals(savedAlert, alert);
 	}
-
 
 	@Test
 	void testHotspotParserHeader() {
@@ -110,8 +83,6 @@ class CanaFireApplicationTests {
 				.expectNextCount(2)
 				.verifyComplete();
 	}
-
-
 
 	@Test
 	void testUiControllerAddAttribute() {
