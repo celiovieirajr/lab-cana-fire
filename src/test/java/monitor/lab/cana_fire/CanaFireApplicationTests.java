@@ -6,18 +6,14 @@ import monitor.lab.cana_fire.ingestion.HotspotParser;
 import monitor.lab.cana_fire.repository.AlertRepository;
 import monitor.lab.cana_fire.service.AlertService;
 import monitor.lab.cana_fire.service.EmailService;
-import monitor.lab.cana_fire.web.UiController;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.ui.Model;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -25,7 +21,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class CanaFireApplicationTests {
 
-/*
+
 	@Test
 	void testAlertServiceCreateAlert() {
 		AlertRepository mockRepo = Mockito.mock(AlertRepository.class);
@@ -79,24 +75,4 @@ class CanaFireApplicationTests {
 				.expectNextCount(2)
 				.verifyComplete();
 	}
-
-	@Test
-	void testUiControllerAddAttribute() {
-		AlertRepository mockRepo = mock(AlertRepository.class);
-		EmailService mockEmail = mock(EmailService.class);
-		AlertService mockService = new AlertService(mockRepo, mockEmail); // Corrigido
-
-		UiController controller = new UiController(mockService); // Corrigido
-
-		List<Alert> alerts = List.of(new Alert(UUID.randomUUID(), -10.0, -45.0, LocalDateTime.now()));
-		when(mockRepo.findTop100ByOrderByDateDesc()).thenReturn(alerts);
-
-		Model mockModel = mock(Model.class);
-
-		String viewName = controller.home(mockModel);
-
-		verify(mockModel).addAttribute("alerts", alerts);
-		assertEquals("alerts", viewName);
-	}
-*/
 }

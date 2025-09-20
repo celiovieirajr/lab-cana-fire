@@ -15,7 +15,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/alerts")
-@AllArgsConstructor
 public class AlertController {
 
     private final AlertRepository alertRepository;
