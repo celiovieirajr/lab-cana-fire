@@ -15,7 +15,6 @@ public class Hotspot {
     private String satelite;
     private Timestamp date;
 
-
     public Geometry toPoint() {
         GeometryFactory factory = new GeometryFactory();
         return factory.createPoint(new Coordinate(lon, lat));

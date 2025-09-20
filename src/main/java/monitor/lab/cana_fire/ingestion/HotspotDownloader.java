@@ -40,6 +40,7 @@ public class HotspotDownloader {
 
         webClient.get()
                 .uri(dinamicUrl)
+//                .uri("focos_10min_20250919_0020.csv")
                 .retrieve()
                 .bodyToFlux(String.class)
                 .flatMap(HotspotParser::parse)
