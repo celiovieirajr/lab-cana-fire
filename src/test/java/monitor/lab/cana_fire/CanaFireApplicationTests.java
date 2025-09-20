@@ -83,7 +83,10 @@ class CanaFireApplicationTests {
 	@Test
 	void testUiControllerAddAttribute() {
 		AlertRepository mockRepo = mock(AlertRepository.class);
-		UiController controller = new UiController(mockRepo);
+		EmailService mockEmail = mock(EmailService.class);
+		AlertService mockService = new AlertService(mockRepo, mockEmail); // Corrigido
+
+		UiController controller = new UiController(mockService); // Corrigido
 
 		List<Alert> alerts = List.of(new Alert(UUID.randomUUID(), -10.0, -45.0, LocalDateTime.now()));
 		when(mockRepo.findTop100ByOrderByDateDesc()).thenReturn(alerts);
@@ -95,6 +98,5 @@ class CanaFireApplicationTests {
 		verify(mockModel).addAttribute("alerts", alerts);
 		assertEquals("alerts", viewName);
 	}
-
- */
+*/
 }

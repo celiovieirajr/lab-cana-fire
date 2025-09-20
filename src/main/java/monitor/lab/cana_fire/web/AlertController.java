@@ -1,5 +1,6 @@
 package monitor.lab.cana_fire.web;
 
+import lombok.AllArgsConstructor;
 import monitor.lab.cana_fire.domain.Alert;
 import monitor.lab.cana_fire.domain.Hotspot;
 import monitor.lab.cana_fire.repository.AlertRepository;
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/alerts")
+@AllArgsConstructor
 public class AlertController {
 
     private final AlertRepository alertRepository;
