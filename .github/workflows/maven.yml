@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "homoloh" ]
+    branches: [ "main" ]
   pull_request_target:
-    branches: [ "homolog" ]
+    branches: [ "main" ]
 
 permissions:
   contents: read
