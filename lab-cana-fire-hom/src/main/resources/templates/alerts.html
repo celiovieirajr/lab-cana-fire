@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alertas de Incêndio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ff6f61;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        a {
+            color: #0077cc;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>🔥 Últimos Alertas de Incêndio</h1>
+<table>
+    <tr>
+        <th>Data</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Mapa</th>
+    </tr>
+    <tr th:each="a : ${alerts}">
+        <td th:text="${#temporals.format(a.date, 'dd/MM HH:mm:ss')}"></td>
+        <td th:text="${a.lat}"></td>
+        <td th:text="${a.lon}"></td>
+        <td>
+            <a th:href="'https://maps.google.com/?q='+${a.lat}+','+${a.lon}" target="_blank">Ver no mapa</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
