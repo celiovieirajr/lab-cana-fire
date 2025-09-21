@@ -2,7 +2,6 @@ package monitor.lab.cana_fire;
 
 import monitor.lab.cana_fire.domain.Alert;
 import monitor.lab.cana_fire.domain.Hotspot;
-import monitor.lab.cana_fire.ingestion.HotspotParser;
 import monitor.lab.cana_fire.repository.AlertRepository;
 import monitor.lab.cana_fire.service.AlertService;
 import monitor.lab.cana_fire.service.EmailService;
@@ -13,8 +12,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.Model;
-import reactor.core.publisher.Flux;
-import reactor.test.StepVerifier;
 
 import java.time.LocalDateTime;
 import java.util.List;
