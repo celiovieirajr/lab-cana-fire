@@ -1,6 +1,5 @@
 package monitor.lab.cana_fire.web;
 
-import lombok.RequiredArgsConstructor;
 import monitor.lab.cana_fire.domain.Alert;
 import monitor.lab.cana_fire.domain.Hotspot;
 import monitor.lab.cana_fire.repository.AlertRepository;
@@ -13,15 +12,22 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/alerts")
 public class AlertController {
-    private final AlertRepository repo;
-    private final AlertService service;
+
+    private AlertRepository alertRepository;
+    private AlertService service;
+
+    public AlertController() {}
+
+    public AlertController(AlertRepository alertRepository, AlertService service) {
+        this.alertRepository = alertRepository;
+        this.service = service;
+    }
 
     @GetMapping("/latest")
     public List<Alert> latest() {
-        return repo.findTop100ByOrderByDateDesc();
+        return alertRepository.findTop100ByOrderByDateDesc();
     }
 
     @GetMapping("/{id}")

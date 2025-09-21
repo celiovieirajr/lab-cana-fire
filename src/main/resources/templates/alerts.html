@@ -14,6 +14,31 @@
             color: #333;
         }
 
+        .search-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e65c50;
+        }
+
         table {
             width: 80%;
             margin: 0 auto;
@@ -50,6 +75,14 @@
 </head>
 <body>
 <h1>🔥 Últimos Alertas de Incêndio</h1>
+
+<!--<div class="search-container">-->
+<!--    <form th:action="@{/buscar-alertas}" method="get">-->
+<!--        <input type="text" name="query" placeholder="Buscar por data, latitude ou longitude">-->
+<!--        <button type="submit">Buscar</button>-->
+<!--    </form>-->
+<!--</div>-->
+
 <table>
     <tr>
         <th>Data</th>

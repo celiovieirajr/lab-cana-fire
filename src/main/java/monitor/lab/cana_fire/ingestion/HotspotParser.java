@@ -16,14 +16,14 @@ public class HotspotParser {
             new ColumnPositionMappingStrategy<>();
     static {
         strat.setType(Hotspot.class);
-        strat.setColumnMapping("lat", "lon", "satelite", "date");
+        strat.setColumnMapping("lat", "lon", "satelite", "dateRaw");
     }
 
     public static Flux<Hotspot> parse(String csv) {
-        boolean existsHeader = csv.trim().startsWith("lat,lon,satelite,data");
+        boolean hasHeader = csv.trim().startsWith("lat,lon,satelite,data");
 
         return Flux.using(
-                () -> new CSVReaderBuilder(new StringReader(csv)).withSkipLines(existsHeader ? 1 : 0).build(),
+                () -> new CSVReaderBuilder(new StringReader(csv.trim())).withSkipLines(hasHeader ? 1 : 0).build(),
                 reader -> Flux.fromIterable(
                         new CsvToBeanBuilder<Hotspot>(reader).withMappingStrategy(strat).build().parse()),
                 reader -> {
