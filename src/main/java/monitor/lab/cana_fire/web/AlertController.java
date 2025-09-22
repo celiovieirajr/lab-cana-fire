@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,21 +27,21 @@ public class AlertController {
     }
 
     @GetMapping("/latest")
-    public List<Alert> latest() {
+    public List<Alert> showLastedHundredController() {
         return alertRepository.findTop100ByOrderByDateDesc();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Alert> getByIdController(@PathVariable UUID id) {
-        Alert entity = service.getAlertById(id);
-        return ResponseEntity.ok(entity);
-    }
 
     @GetMapping
-    public ResponseEntity<List<Alert>> getAllAlertsController() {
-        List<Alert> alerts = service.getAllAlerts();
-        return ResponseEntity.ok(alerts);
+    public List<Alert> findAllController() {
+        return (List<Alert>) alertRepository.findAll();
     }
+
+    @GetMapping("/{id}")
+    public Optional<Alert> findByIdController(@PathVariable UUID id) {
+        return alertRepository.findById(id);
+    }
+
 
     @PostMapping
     public ResponseEntity<Alert> createAlertController(@RequestBody Hotspot hotspot) {

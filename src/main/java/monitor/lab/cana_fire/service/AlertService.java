@@ -8,8 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.UUID;
 
 @Service
@@ -32,16 +31,6 @@ public class AlertService {
         return alert;
         }
 
-        public Alert getAlertById(UUID id) {
-        return repo.findById(id).orElseThrow(()
-                -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Id não foi encontrado"));
-        }
-
-        public List<Alert> getAllAlerts() {
-            List<Alert> alerts = new ArrayList<>();
-            repo.findAll().forEach(alerts::add);
-            return alerts;
-        }
 
         public Alert updateAlert(UUID uuid, Alert alert) {
             Alert entity = repo.findById(uuid)

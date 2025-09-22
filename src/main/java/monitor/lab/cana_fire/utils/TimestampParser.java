@@ -1,4 +1,4 @@
-package monitor.lab.cana_fire.ingestion;
+package monitor.lab.cana_fire.utils;
 
 
 import java.sql.Timestamp;
