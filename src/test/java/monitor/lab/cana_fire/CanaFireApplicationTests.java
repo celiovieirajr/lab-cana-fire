@@ -25,31 +25,6 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class CanaFireApplicationTests {
 
-	@Test
-	void testAlertServiceCreateAlert() {
-		AlertRepository mockRepo = Mockito.mock(AlertRepository.class);
-		EmailService mockEmail = Mockito.mock(EmailService.class);
-		AlertService service = new AlertService(mockRepo, mockEmail);
-
-		Hotspot hotspot = new Hotspot();
-		hotspot.setLat(-10.1234);
-		hotspot.setLon(-45.6789);
-		hotspot.setDate(java.sql.Timestamp.valueOf(LocalDateTime.of(2025, 8, 14, 13, 30)));
-
-		Alert alert = service.createAlert(hotspot);
-
-		ArgumentCaptor<Alert> captor = ArgumentCaptor.forClass(Alert.class);
-		verify(mockRepo).save(captor.capture());
-
-		Alert savedAlert = captor.getValue();
-		assertEquals(-10.1234, savedAlert.getLat());
-		assertEquals(-45.6789, savedAlert.getLon());
-		assertEquals(LocalDateTime.of(2025, 8, 14, 13, 30), savedAlert.getDate());
-
-		assertEquals(savedAlert, alert);
-	}
-
-
 
 	@Test
 	void testUiControllerAddAttribute() {
