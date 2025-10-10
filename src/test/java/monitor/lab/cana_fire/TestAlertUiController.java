@@ -1,16 +1,11 @@
 package monitor.lab.cana_fire;
 
 import monitor.lab.cana_fire.domain.Alert;
-import monitor.lab.cana_fire.domain.Hotspot;
 import monitor.lab.cana_fire.repository.AlertRepository;
-import monitor.lab.cana_fire.service.AlertService;
-import monitor.lab.cana_fire.service.EmailService;
 import monitor.lab.cana_fire.web.UiController;
 
 
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.ui.Model;
 
@@ -23,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class CanaFireApplicationTests {
+class TestAlertUiController {
 
 
 	@Test

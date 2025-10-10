@@ -2,13 +2,15 @@ package monitor.lab.cana_fire.web;
 
 import monitor.lab.cana_fire.domain.Alert;
 import monitor.lab.cana_fire.domain.Hotspot;
+import monitor.lab.cana_fire.dto.AlertResponseDto;
 import monitor.lab.cana_fire.repository.AlertRepository;
-import monitor.lab.cana_fire.service.AlertService;
+import monitor.lab.cana_fire.service.AlertServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -16,42 +18,40 @@ import java.util.UUID;
 public class AlertController {
 
     private AlertRepository alertRepository;
-    private AlertService service;
+    private AlertServiceImpl service;
 
     public AlertController() {}
 
-    public AlertController(AlertRepository alertRepository, AlertService service) {
+    public AlertController(AlertRepository alertRepository, AlertServiceImpl service) {
         this.alertRepository = alertRepository;
         this.service = service;
     }
 
     @GetMapping("/latest")
-    public List<Alert> latest() {
+    public List<Alert> showLastedHundredController() {
         return alertRepository.findTop100ByOrderByDateDesc();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Alert> getByIdController(@PathVariable UUID id) {
-        Alert entity = service.getAlertById(id);
-        return ResponseEntity.ok(entity);
+    @GetMapping
+    public List<Alert> findAllController() {
+        return (List<Alert>) alertRepository.findAll();
     }
 
-    @GetMapping
-    public ResponseEntity<List<Alert>> getAllAlertsController() {
-        List<Alert> alerts = service.getAllAlerts();
-        return ResponseEntity.ok(alerts);
+    @GetMapping("/{id}")
+    public Optional<Alert> findByIdController(@PathVariable UUID id) {
+        return alertRepository.findById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Alert> createAlertController(@RequestBody Hotspot hotspot) {
-        Alert created = service.createAlert(hotspot);
+    public ResponseEntity<AlertResponseDto> createAlertController(@RequestBody Hotspot hotspot) {
+        AlertResponseDto created = service.createAlert(hotspot);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Alert> updateAlertController(@PathVariable UUID id,
+    public ResponseEntity<AlertResponseDto> updateAlertController(@PathVariable UUID id,
                                                        @RequestBody Alert alert) {
-        Alert response = service.updateAlert(id, alert);
+        AlertResponseDto response = service.updateAlert(id, alert);
         return ResponseEntity.ok(response);
     }
 

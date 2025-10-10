@@ -1,7 +1,7 @@
 package monitor.lab.cana_fire.domain;
 
 import lombok.Data;
-import monitor.lab.cana_fire.ingestion.TimestampParser;
+import monitor.lab.cana_fire.utils.TimestampParser;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
