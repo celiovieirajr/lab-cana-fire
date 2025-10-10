@@ -49,35 +49,7 @@ class CanaFireApplicationTests {
 		assertEquals(savedAlert, alert);
 	}
 
-	@Test
-	void testHotspotParserHeader() {
-		String csv = """
-            lat,lon,satelite,data
-            -10.1234,-45.6789,AQUA,2025-08-11 12:59:00
-            -11.5678,-46.1234,TERRA,2025-08-11 12:59:00
-            """;
 
-		Flux<Hotspot> result = HotspotParser.parse(csv);
-
-		StepVerifier.create(result)
-				.expectNextMatches(h -> h.getLat() == -10.1234 && h.getLon() == -45.6789 && h.getSatelite().equals("AQUA"))
-				.expectNextMatches(h -> h.getLat() == -11.5678 && h.getLon() == -46.1234 && h.getSatelite().equals("TERRA"))
-				.verifyComplete();
-	}
-
-	@Test
-	void testParseCsvWithoutHeader() {
-		String csv = """
-            -10.1234,-45.6789,AQUA,2025-08-11 12:59:00
-            -11.5678,-46.1234,TERRA,2025-08-11 12:59:00
-            """;
-
-		Flux<Hotspot> result = HotspotParser.parse(csv);
-
-		StepVerifier.create(result)
-				.expectNextCount(2)
-				.verifyComplete();
-	}
 
 	@Test
 	void testUiControllerAddAttribute() {

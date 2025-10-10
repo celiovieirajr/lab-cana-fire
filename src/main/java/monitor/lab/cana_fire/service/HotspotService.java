@@ -1,8 +1,11 @@
 package monitor.lab.cana_fire.service;
 
 import monitor.lab.cana_fire.domain.Hotspot;
+import monitor.lab.cana_fire.dto.AlertResponseDto;
 import org.locationtech.jts.geom.prep.PreparedGeometry;
 import org.locationtech.jts.geom.prep.PreparedGeometryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.geotools.geojson.geom.GeometryJSON;
 import org.locationtech.jts.geom.Geometry;
@@ -19,10 +22,12 @@ import java.util.List;
 public class HotspotService {
 
     private final List<PreparedGeometry> farms;
-    private final AlertService alertService;
+    private final AlertServiceImpl alertService;
+
+    private final static Logger log = LoggerFactory.getLogger(AlertServiceImpl.class);
 
     public HotspotService(@Value("classpath:geo/*.geojson") Resource[] resources,
-                          AlertService alertService) throws IOException {
+                          AlertServiceImpl alertService) throws IOException {
         GeometryJSON gjson = new GeometryJSON();
         List<PreparedGeometry> geometries = new ArrayList<>();
 
@@ -39,9 +44,14 @@ public class HotspotService {
 
 
     public void handle(Hotspot hotspot) {
-                farms.stream()
+        farms.stream()
                 .filter(pg -> pg.contains(hotspot.toPoint()))
                 .findFirst()
-                .ifPresent(pg -> alertService.createAlert(hotspot));
+                .ifPresent(pg -> {
+                    AlertResponseDto responseDto = alertService.createAlert(hotspot);
+
+                    log.info(String.valueOf(responseDto));
+                    alertService.sendAlertEmail(responseDto);
+                });
     }
 }
