@@ -27,12 +27,7 @@ public class AlertServiceImpl implements AlertService{
 
     @Override
     public AlertResponseDto createAlert(Hotspot hotspot) {
-        Alert alert = new Alert(
-                null,
-                hotspot.getLat(),
-                hotspot.getLon(),
-                hotspot.getDate().toLocalDateTime()
-        );
+        Alert alert = mapper.createAlertFromHotspot(hotspot);
         repo.save(alert);
         return mapper.toResponse(alert);
     }
