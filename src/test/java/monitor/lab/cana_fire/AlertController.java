@@ -17,13 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
-public class AlertControllerUnitTest {
+public class AlertController {
 
     @Mock
     private AlertRepository alertRepository;
 
     @InjectMocks
-    private monitor.lab.cana_fire.web.AlertControllerUnitTest alertController;
+    private monitor.lab.cana_fire.web.AlertController alertController;
 
     @Test
     void shouldReturnLatestAlerts() {
@@ -34,6 +34,11 @@ public class AlertControllerUnitTest {
 
         assertEquals(1, result.size());
         assertNotNull(result);
+    }
+
+    @Test
+    void shouldReturnCreateAlert() {
+
     }
 }
 

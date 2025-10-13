@@ -1,6 +1,7 @@
 package monitor.lab.cana_fire.mapper;
 
 import monitor.lab.cana_fire.domain.Alert;
+import monitor.lab.cana_fire.domain.Hotspot;
 import monitor.lab.cana_fire.dto.AlertResponseDto;
 import org.springframework.stereotype.Component;
 
@@ -14,5 +15,14 @@ public class AlertMapper {
         responseDto.setDate(alert.getDate());
 
         return responseDto;
+    }
+
+    public Alert createAlertFromHotspot(Hotspot hotspot) {
+        Alert alert = new Alert();
+        alert.setLon(hotspot.getLon());
+        alert.setLat(hotspot.getLat());
+        alert.setDate(hotspot.getDate().toLocalDateTime());
+
+        return alert;
     }
 }
