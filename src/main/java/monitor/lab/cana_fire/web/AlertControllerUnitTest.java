@@ -15,14 +15,14 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/alerts")
-public class AlertController {
+public class AlertControllerUnitTest {
 
     private AlertRepository alertRepository;
     private AlertServiceImpl service;
 
-    public AlertController() {}
+    public AlertControllerUnitTest() {}
 
-    public AlertController(AlertRepository alertRepository, AlertServiceImpl service) {
+    public AlertControllerUnitTest(AlertRepository alertRepository, AlertServiceImpl service) {
         this.alertRepository = alertRepository;
         this.service = service;
     }
