@@ -10,5 +10,4 @@ import java.util.UUID;
 public interface AlertRepository extends CrudRepository<Alert, UUID> {
 
     List<Alert> findTop100ByOrderByDateDesc();
-
 }
