@@ -24,7 +24,7 @@ public class EmailServiceImpl implements EmailService {
 
     public void notify(AlertResponseDto a) {
         SimpleMailMessage mensagem = new SimpleMailMessage();
-        mensagem.setTo("lucasemanuelc.rodrigue@gmail.com", "celiojuniorata@gmail.com");
+        mensagem.setTo("celiojuniorata@gmail.com");
         mensagem.setSubject("🔥 Alerta de Incêndio Detectado!");
         mensagem.setText(AlertMessageBuilder.buildEmailMessage(a));
         mensagem.setFrom("monitorcanafire@gmail.com");

@@ -51,7 +51,7 @@ public class HotspotService {
                     AlertResponseDto responseDto = alertService.createAlert(hotspot);
 
                     log.info(String.valueOf(responseDto));
-                    alertService.sendAlertEmail(responseDto);
+//                    alertService.sendAlertEmail(responseDto);
                 });
     }
 }

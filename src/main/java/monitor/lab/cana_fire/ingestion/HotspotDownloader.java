@@ -26,7 +26,8 @@ public class HotspotDownloader {
     private static final Logger logger = LoggerFactory.getLogger(HotspotDownloader.class);
 
 
-    @Scheduled(fixedDelayString = "${api.fixed.delay}")
+//    @Scheduled(fixedDelayString = "${api.fixed.delay}")
+    @Scheduled(fixedRate = 10000)
     public void downloaderHotspot() {
 
         String dinamicUrl = getLastedUrl.getLatestHotspotUrl();
@@ -34,7 +35,7 @@ public class HotspotDownloader {
         logger.info(dinamicUrl);
 
         webClient.get()
-                .uri(dinamicUrl)
+                .uri("/focos_10min_20260101_0000.csv")
                 .retrieve()
                 .bodyToFlux(String.class)
                 .flatMap(HotspotParser::parse)

@@ -3,12 +3,19 @@ package monitor.lab.cana_fire.web;
 import monitor.lab.cana_fire.domain.Alert;
 import monitor.lab.cana_fire.domain.Hotspot;
 import monitor.lab.cana_fire.dto.AlertResponseDto;
+import monitor.lab.cana_fire.mapper.AlertMapper;
 import monitor.lab.cana_fire.repository.AlertRepository;
 import monitor.lab.cana_fire.service.AlertServiceImpl;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,9 +27,10 @@ public class AlertController {
     private AlertRepository alertRepository;
     private AlertServiceImpl service;
 
-    public AlertController() {}
+//    public AlertController() {}
 
-    public AlertController(AlertRepository alertRepository, AlertServiceImpl service) {
+    public AlertController(AlertRepository alertRepository,
+                           AlertServiceImpl service) {
         this.alertRepository = alertRepository;
         this.service = service;
     }
@@ -32,7 +40,21 @@ public class AlertController {
         return alertRepository.findTop100ByOrderByDateDesc();
     }
 
-    @GetMapping
+
+    @GetMapping("/exports")
+    public ResponseEntity<InputStreamResource> exportAlertsController() throws IOException {
+        ByteArrayInputStream stream = service.exportAlerts();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "attachment; filename=alerts.xlsx");
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(new InputStreamResource(stream));
+    }
+
+        @GetMapping
     public List<Alert> findAllController() {
         return (List<Alert>) alertRepository.findAll();
     }
